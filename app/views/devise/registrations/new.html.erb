@@ -14,10 +14,7 @@
   </div>
 
   <div class="field w-50 mx-auto">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-    <% end %><span class="text-danger">*</span><br>
+    <%= f.label :password %><span class="text-danger">*</span><br>
     <%= f.text_field :password, autocomplete: "new-password", class: "form-control" %>
   </div>
 

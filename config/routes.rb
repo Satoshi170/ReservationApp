@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/show'
 
+  get 'users/account'
+  get 'users/profile'
+  get 'users/profile/edit' => 'users#edit'
+
   root to: "home#index"
 
   devise_for :users, controllers: {

@@ -19,7 +19,8 @@
             <% if user_signed_in? %>
               <div class="dropdown">
                 <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                  <img src="https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                  <%= image_tag current_user.image, alt: 'User Icon', size: '32x32', class: "rounded-circle mx-1" %>
+                  <%= current_user.name %>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownUser1">
                   <li>
@@ -35,7 +36,7 @@
                     <%= link_to "登録済み一覧", "#", class: "dropdown-item" %>
                   </li>
                   <li>
-                    <%= link_to "アカウント設定", "#", class: "dropdown-item" %>
+                    <%= link_to "アカウント設定", "/users/account", class: "dropdown-item" %>
                   </li>
                   <li>
                     <hr class="dropdown-divider">
