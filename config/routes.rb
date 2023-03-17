@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :rooms
+  resources :rooms do
+    collection do
+      get 'own'
+      get 'search'
+    end
+  end
 
   get 'home/index'
   get 'home/show'

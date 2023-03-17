@@ -1,5 +1,6 @@
 class Room < ApplicationRecord
   has_one_attached :image
+  belongs_to :user
 
   before_create :default_image
 
@@ -7,6 +8,14 @@ class Room < ApplicationRecord
   validates :content, presence: true
   validates :price, presence: true
   validates :address, presence: true
+
+  def self.search(search)
+    if search != ""
+      Room.where('address LIKE(?)', "%#{search}%")
+    else
+      Room.all
+    end
+  end
 
   private
 

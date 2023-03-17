@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable
 
   has_one_attached :image
+  has_many :rooms
 
   before_create :default_image
 

@@ -6,6 +6,14 @@ class RoomsController < ApplicationController
     @rooms = Room.all
   end
 
+  def own
+    @rooms = current_user.rooms
+  end
+
+  def search
+    @rooms = Room.search(params[:keyword])
+  end
+
   # GET /rooms/1 or /rooms/1.json
   def show
   end
@@ -22,6 +30,7 @@ class RoomsController < ApplicationController
   # POST /rooms or /rooms.json
   def create
     @room = Room.new(room_params)
+    @room.user_id = current_user.id
 
     respond_to do |format|
       if @room.save
@@ -58,6 +67,7 @@ class RoomsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])

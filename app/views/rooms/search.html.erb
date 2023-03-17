@@ -1,0 +1,30 @@
+<%= form_with(url: search_rooms_path, local: true, method: :get) do |f| %>
+  <%= f.text_field :keyword %>
+  <%= f.submit "検索" %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>画像</th>
+      <th>Name</th>
+      <th>Content</th>
+      <th>Price</th>
+      <th>Address</th>
+      <th>作成日</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rooms.each do |room| %>
+      <tr>
+        <td><%= image_tag room.image, size: '100x100' %></td>
+        <td><%= link_to "#{room.name}", room %></td>
+        <td><%= room.content %></td>
+        <td><%= room.price.to_s(:delimited) %></td>
+        <td><%= room.address %></td>
+        <td><%= l room.created_at, format: :short %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
