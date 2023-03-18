@@ -1,4 +1,6 @@
-<%= form_with(url: search_rooms_path, local: true, method: :get) do |f| %>
-  <%= f.text_field :keyword %>
-  <%= f.submit "検索" %>
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.label :address_cont, 'エリア' %>
+  <%= f.search_field :address_cont %>
+  <br>
+  <%= f.submit '検索' %>
 <% end %>

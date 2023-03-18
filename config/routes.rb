@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'users/profile'
   get 'users/profile/edit' => 'users#edit'
 
-  root to: "home#index"
+  root to: "rooms#index"
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',

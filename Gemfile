@@ -68,3 +68,5 @@ gem 'devise'
 
 # devise日本語化
 gem 'devise-i18n'
+
+gem 'ransack'

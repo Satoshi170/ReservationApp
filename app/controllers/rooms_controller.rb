@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_room, only: %i[ show edit update destroy ]
+  before_action :set_q, only: [:index, :search]
 
   # GET /rooms or /rooms.json
   def index
@@ -11,7 +12,7 @@ class RoomsController < ApplicationController
   end
 
   def search
-    @rooms = Room.search(params[:keyword])
+    @results = @q.result
   end
 
   # GET /rooms/1 or /rooms/1.json
@@ -69,6 +70,11 @@ class RoomsController < ApplicationController
   private
 
     # Use callbacks to share common setup or constraints between actions.
+    def set_q
+      @q = Room.ransack(params[:q])
+    end
+
+
     def set_room
       @room = Room.find(params[:id])
     end
