@@ -1,34 +1,28 @@
-<h1>test</h1>
+<h2 class="my-3">登録済み一覧</h2>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th>画像</th>
-      <th>Name</th>
-      <th>Content</th>
-      <th>Price</th>
-      <th>Address</th>
-      <th>作成日</th>
+      <th scope="col">画像</th>
+      <th scope="col">施設名</th>
+      <th scope="col">紹介文</th>
+      <th scope="col">料金</th>
+      <th scope="col">作成日</th>
       <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @rooms.each do |room| %>
-      <tr>
+      <tr class="align-middle">
         <td><%= image_tag room.image, size: '100x100' %></td>
-        <td><%= link_to "#{room.name}", room %></td>
+        <td><%= link_to "#{room.name}", room, class: "text-decoration-none" %></td>
         <td><%= room.content %></td>
-        <td><%= room.price.to_s(:delimited) %></td>
-        <td><%= room.address %></td>
+        <td><span>¥</span><%= room.price.to_s(:delimited) %><span>~</span></td>
         <td><%= l room.created_at, format: :short %></td>
-        <td><%= link_to 'Edit', edit_room_path(room) %></td>
-        <td><%= link_to 'Destroy', room, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_room_path(room), class: "text-decoration-none" %></td>
+        <td><%= link_to 'Destroy', room, class: "text-decoration-none", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Room', new_room_path %>

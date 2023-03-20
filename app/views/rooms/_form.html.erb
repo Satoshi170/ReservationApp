@@ -1,4 +1,4 @@
-<%= form_with(model: room) do |form| %>
+<%= form_with(model: room, class:"w-25 mx-auto mt-5") do |form| %>
   <% if room.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
@@ -11,32 +11,36 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.file_field :image %>
+  <div class="field my-1">
+    <%= form.label :image, class: "form-label" %>
+    <%= form.file_field :image, class: "form-control", type: "file" %>
   </div>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, class: "form-control", size:"20x5" %>
   </div>
 
   <div class="field">
-    <%= form.label :price %>
-    <%= form.number_field :price %>
+    <%= form.label :price, class: "form-label" %>
+    <%= form.number_field :price, class: "form-control" %>
   </div>
 
   <div class="field">
-    <%= form.label :address %>
-    <%= form.text_field :address %>
+    <%= form.label :address, class: "form-label" %>
+    <%= form.text_field :address, class: "form-control" %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions text-center my-3">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+  <div class="text-center">
+    <%= link_to '戻る', :back %>
   </div>
 <% end %>
