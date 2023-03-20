@@ -6,6 +6,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reservations do
+    collection do
+      get 'own'
+    end
+  end
+
   get 'home/index'
   get 'home/show'
 
