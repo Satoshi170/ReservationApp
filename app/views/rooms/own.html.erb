@@ -1,20 +1,19 @@
 <h2 class="my-3">登録済み一覧</h2>
 
-<table class="table">
+<table class="table align-middle text-break">
   <thead>
     <tr>
       <th scope="col">画像</th>
       <th scope="col">施設名</th>
-      <th scope="col">紹介文</th>
+      <th scope="col" class="w-50">紹介文</th>
       <th scope="col">料金</th>
       <th scope="col">作成日</th>
       <th colspan="2"></th>
     </tr>
   </thead>
-
   <tbody>
     <% @rooms.each do |room| %>
-      <tr class="align-middle">
+      <tr class>
         <td><%= image_tag room.image, size: '100x100' %></td>
         <td><%= link_to "#{room.name}", room, class: "text-decoration-none" %></td>
         <td><%= room.content %></td>
