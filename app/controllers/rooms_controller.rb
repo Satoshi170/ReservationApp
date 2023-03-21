@@ -17,6 +17,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/1 or /rooms/1.json
   def show
+    @reservation = Reservation.new
   end
 
   # GET /rooms/new
