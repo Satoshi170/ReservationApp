@@ -13,7 +13,11 @@ class Room < ApplicationRecord
   private
 
   def self.ransackable_attributes(auth_object = nil)
-    ["address", "content"]
+    ["address", "name", "content"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["image_attachment", "image_blob", "reservations", "user"]
   end
 
   def default_image
