@@ -1,12 +1,33 @@
-<h4>予約内容の確認</h4>
-<%= @reservation.checkin_date %>
+<div class="w-50 mx-auto card mt-3 px-3">
+  <h2 class="text-center my-3">予約内容の確認</h2>
+  <div class="d-flex justify-content-between">
+    <h4>チェックイン</h4>
+    <%= l @reservation.checkin_date %>
+  </div>
+  <div class="d-flex justify-content-between my-3">
+    <h4>チェックアウト</h4>
+    <%= l @reservation.checkout_date %>
+  </div>
+  <div class="d-flex justify-content-between">
+    <h4>日数</h4>
+    <p><%= (@reservation.checkout_date - @reservation.checkin_date).to_i %>日</p>
+  </div>
+  <div class="d-flex justify-content-between my-3">
+    <h4>人数</h4>
+    <p><%= @reservation.count_people %>人</p>
+  </div>
+  <div class="d-flex justify-content-between mb-3">
+    <h4>合計金額</h4>
+    <h4>¥<%= @reservation.room.price * (@reservation.checkout_date - @reservation.checkin_date).to_i %></h4>
+  </div>
+</div>
 
 <%= form_with(model: @reservation) do |form| %>
   <%= form.hidden_field :checkin_date %>
   <%= form.hidden_field :checkout_date %>
   <%= form.hidden_field :count_people %>
   <%= form.hidden_field :room_id %>
-  <div class="actions my-3">
+  <div class="actions my-3 mx-auto w-50 text-center">
     <%= form.submit "予約する", class:"btn btn-primary" %>
     <%= form.submit "戻る", name: :back, class:"btn btn-primary" %>
   </div>
