@@ -1,0 +1,13 @@
+<h4>予約内容の確認</h4>
+<%= @reservation.checkin_date %>
+
+<%= form_with(model: @reservation) do |form| %>
+  <%= form.hidden_field :checkin_date %>
+  <%= form.hidden_field :checkout_date %>
+  <%= form.hidden_field :count_people %>
+  <%= form.hidden_field :room_id %>
+  <div class="actions my-3">
+    <%= form.submit "予約する", class:"btn btn-primary" %>
+    <%= form.submit "戻る", name: :back, class:"btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,31 +1,33 @@
-<h2>予約済み一覧</h2>
+<h2 class="my-3">予約済み一覧</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>画像</th>
-      <th>施設名</th>
-      <th>紹介文</th>
-      <th>合計料金</th>
-      <th>チェックイン</th>
-      <th>チェックアウト</th>
-      <th>予約確定日時</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @reservations.each do |reservation| %>
+<div class="table-responsive">
+  <table class="table align-middle text-break">
+    <thead>
       <tr>
-        <td><%= reservation.checkin_date %></td>
-        <td><%= reservation.checkout_date %></td>
-        <td><%= reservation.count_people %></td>
-        <td><%= reservation.user_id %></td>
-        <td><%= reservation.room_id %></td>
-        <td><%= link_to 'Show', reservation %></td>
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th scope="col">画像</th>
+        <th scope="col">施設名</th>
+        <th scope="col" class="w-25">紹介文</th>
+        <th scope="col">合計料金</th>
+        <th scope="col">チェックイン</th>
+        <th scope="col">チェックアウト</th>
+        <th scope="col">予約確定日時</th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= image_tag reservation.room.image, size: '100x100' %></td>
+          <td><%= reservation.room.name %></td>
+          <td><%= reservation.room.content %></td>
+          <td>¥<%= (reservation.count_people*reservation.room.price).to_s(:delimited) %></td>
+          <td><%= l reservation.checkin_date %></td>
+          <td><%= l reservation.checkout_date %></td>
+          <td><%=  l reservation.updated_at %></td>
+          <td><%= link_to '再予約', edit_reservation_path(reservation), class: "text-decoration-none" %></td>
+          <td><%= link_to '取り消し', reservation, class: "text-decoration-none", method: :delete, data: { confirm: '本当に取り消しますか?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

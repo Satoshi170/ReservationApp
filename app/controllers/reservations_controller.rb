@@ -10,6 +10,14 @@ class ReservationsController < ApplicationController
     @reservations = current_user.reservations
   end
 
+  def confirm
+    @reservation = Reservation.new(reservation_params)
+    @room = Room.find(params[:reservation][:room_id])
+    if @reservation.invalid?
+      render "rooms/show"
+    end
+  end
+
   # GET /reservations/1 or /reservations/1.json
   def show
   end
@@ -17,7 +25,6 @@ class ReservationsController < ApplicationController
   # GET /reservations/new
   def new
     @reservation = Reservation.new
-
   end
 
   # GET /reservations/1/edit
@@ -26,18 +33,11 @@ class ReservationsController < ApplicationController
 
   # POST /reservations or /reservations.json
   def create
+    @room = Room.find(params[:reservation][:room_id])
     @reservation = Reservation.new(reservation_params)
     @reservation.user_id = current_user.id
-
-    respond_to do |format|
-      if @reservation.save
-        format.html { redirect_to reservation_url(@reservation), notice: "Reservation was successfully created." }
-        format.json { render :show, status: :created, location: @reservation }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @reservation.errors, status: :unprocessable_entity }
-      end
-    end
+    render "rooms/show" and return if params[:back] || !@reservation.save
+    redirect_to action: :own
   end
 
   # PATCH/PUT /reservations/1 or /reservations/1.json
@@ -58,7 +58,7 @@ class ReservationsController < ApplicationController
     @reservation.destroy
 
     respond_to do |format|
-      format.html { redirect_to reservations_url, notice: "Reservation was successfully destroyed." }
+      format.html { redirect_to action: :own, notice: "Reservation was successfully destroyed." }
       format.json { head :no_content }
     end
   end

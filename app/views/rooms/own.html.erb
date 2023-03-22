@@ -18,10 +18,10 @@
           <td><%= image_tag room.image, size: '100x100' %></td>
           <td><%= link_to "#{room.name}", room, class: "text-decoration-none" %></td>
           <td><%= room.content %></td>
-          <td><span>¥</span><%= room.price.to_s(:delimited) %><span>~</span></td>
+          <td>¥<%= room.price.to_s(:delimited) %>~</td>
           <td><%= l room.created_at, format: :short %></td>
-          <td><%= link_to 'Edit', edit_room_path(room), class: "text-decoration-none" %></td>
-          <td><%= link_to 'Destroy', room, class: "text-decoration-none", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
+          <td><%= link_to '編集', edit_room_path(room), class: "text-decoration-none" %></td>
+          <td><%= link_to '削除', room, class: "text-decoration-none", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
         </tr>
       <% end %>
     </tbody>

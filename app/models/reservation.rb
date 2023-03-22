@@ -17,8 +17,8 @@ class Reservation < ApplicationRecord
   end
 
   def start_end_check
-    if checkin_date > checkout_date
-      errors.add(:checkout_date, "はチェックイン日より前の日付は登録できません")
+    if checkin_date >= checkout_date
+      errors.add(:checkout_date, "はチェックイン日より後の日付にしてください")
     end
   end
 end
