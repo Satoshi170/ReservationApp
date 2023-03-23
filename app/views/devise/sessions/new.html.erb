@@ -8,7 +8,7 @@
 
   <div class="field w-50 mx-auto">
     <%= f.label :password %><br>
-    <%= f.text_field :password, autocomplete: "current-password", class: "form-control"%>
+    <%= f.password_field :password, autocomplete: "current-password", class: "form-control"%>
   </div>
 
   <% if devise_mapping.rememberable? %>
