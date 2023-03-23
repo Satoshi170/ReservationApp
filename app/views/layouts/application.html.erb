@@ -1,16 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja" class="h-100">
   <head>
     <title>ReservationApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="d-flex flex-column h-100">
+    <header>
+      <nav class="navbar navbar-expand navbar-dark bg-dark">
+        <div class="container">
+          <%= link_to "ReservationApp", "/", class: "navbar-brand" %>
+          <div class="flex-row-reverse">
+            <% if user_signed_in? %>
+              <div class="dropdown">
+                <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <%= image_tag current_user.image, alt: 'User Icon', size: '32x32', class: "rounded-circle mx-1" %>
+                  <%= current_user.name %>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownUser1">
+                  <li>
+                    <%= link_to "施設の新規登録", "/rooms/new", class: "dropdown-item" %>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <%= link_to "予約済み一覧", "/reservations/own", class: "dropdown-item" %>
+                  </li>
+                  <li>
+                    <%= link_to "登録済み一覧", "/rooms/own", class: "dropdown-item" %>
+                  </li>
+                  <li>
+                    <%= link_to "アカウント設定", "/users/account", class: "dropdown-item" %>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li>
+                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                  </li>
+                </ul>
+              </div>
+            <% else %>
+              <ul class="navbar-nav">
+                <li class="nav-item mx-1">
+                  <%= link_to "ログイン", "/users/sign_in", class: "navbar-link btn btn-dark" %>
+                </li>
+                <li class="nav-item">
+                  <%= link_to "新規登録", "/users/sign_up", class: "navbar-link btn btn-primary" %>
+                </li>
+              </ul>
+            <% end %>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <% flash.each do |key, value| %>
+      <p class="alert text-center alert-<%= key %>">
+        <%= value %>
+      </p>
+    <% end %>
+    <main class="container flex-shrink-0 my-1">
+      <%= yield %>
+    </main>
+    <footer class="footer mt-auto py-3 bg-dark text-center">
+      <div class="container">
+        <span class="text-muted">Rails実践課題2</span>
+      </div>
+    </footer>
   </body>
 </html>

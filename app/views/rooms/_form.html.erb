@@ -1,0 +1,46 @@
+<%= form_with(model: room, class:"w-25 mx-auto mt-5") do |form| %>
+  <% if room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+        <% room.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field my-1">
+    <%= form.label :image, class: "form-label" %>
+    <%= form.file_field :image, class: "form-control", type: "file" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content, class: "form-label" %>
+    <%= form.text_area :content, class: "form-control", size:"20x5" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :price, class: "form-label" %>
+    <%= form.number_field :price, class: "form-control" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :address, class: "form-label" %>
+    <%= form.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="actions text-center my-3">
+    <%= form.submit class: "btn btn-primary" %>
+  </div>
+
+  <div class="text-center">
+    <%= link_to '戻る', :back %>
+  </div>
+<% end %>

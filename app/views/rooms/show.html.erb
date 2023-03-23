@@ -1,0 +1,46 @@
+<div class="my-5">
+  <%= link_to '←戻る', :back, class:"text-decoration-none h5" %>
+</div>
+<div class="d-flex">
+  <%= image_tag @room.image, size: "500x300" %>
+  <div class="card mx-5 w-100 px-3">
+    <div class="d-flex justify-content-between mt-5">
+      <h3><%= @room.name %></h3>
+      <h3>¥<%= @room.price %>~</h3>
+    </div>
+    <h6><%= @room.address %></h6>
+    <h5><%= @room.content %></h5>
+    <%= form_with(model: @reservation, url: confirm_reservations_path(@reservation)) do |form| %>
+      <% if @reservation.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+          <ul>
+            <% @reservation.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :checkin_date %>
+        <%= form.date_select :checkin_date %>
+      </div>
+
+      <div class="field">
+        <%= form.label :checkout_date %>
+        <%= form.date_select :checkout_date %>
+      </div>
+
+      <div class="field">
+        <%= form.label :count_people %>
+        <%= form.number_field :count_people, min: 1 %>
+      </div>
+      <%= form.hidden_field :room_id, value: @room.id %>
+      <%= form.hidden_field :user_id, value: current_user.id %>
+      <div class="actions my-3">
+        <%= form.submit "確認画面へ", class:"btn btn-primary w-100" %>
+      </div>
+    <% end %>
+  </div>
+</div>

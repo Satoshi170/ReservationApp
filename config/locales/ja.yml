@@ -1,0 +1,17 @@
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M"
+      short: "%Y/%m/%d"
+  activerecord:
+    attributes:
+      room:
+        image: 施設画像
+        name: 施設名
+        content: 紹介文
+        price: 料金
+        address: 住所
+      reservation:
+        checkin_date: チェックイン
+        checkout_date: チェックアウト
+        count_people: 人数
